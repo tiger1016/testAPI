@@ -19,6 +19,8 @@ export class EventService {
         const withdrawn = this.balanceService.withdrawOne(event.origin, event.amount)
         return withdrawn
       case RequestType.transfer:
+        const transfer = this.balanceService.transferOne(event.origin, event.destination, event.amount)
+        return transfer
         break;
       default:
         break;

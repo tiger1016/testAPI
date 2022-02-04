@@ -52,4 +52,45 @@ export class BalanceService {
     }
     throw new HttpException('Not Found', 404)
   }
+
+  transferOne(from: string, to: string, value: number) {
+    const indexFrom = this.balances.findIndex(item => item.id === from);
+    if (indexFrom > -1) {
+      const updatedFrom = this.balances[indexFrom].balance - value
+      const indexTo = this.balances.findIndex(item => item.id === to);
+      
+      if (indexTo > -1) {
+        const updatedTo = this.balances[indexTo].balance + value
+        this.balances = [...this.balances.slice(0, indexFrom), {id: from, balance: updatedFrom}, ...this.balances.slice(indexFrom + 1)]
+        this.balances = [...this.balances.slice(0, indexTo), { id: to, balance: updatedTo }, ...this.balances.slice(indexTo + 1)]
+        return {
+          origin: {
+            id: from,
+            balance: updatedFrom
+          },
+          destination: {
+            id: to,
+            balance: updatedTo
+          }
+        }
+      }
+
+      this.balances = [...this.balances.slice(0, indexFrom), { id: from, balance: updatedFrom }, ...this.balances.slice(indexFrom + 1), {
+        id: to,
+        balance: value
+      }]
+      return {
+        origin: {
+          id: from,
+          balance: updatedFrom
+        },
+        destination: {
+          id: to,
+          balance: value
+        }
+      }
+    }
+
+    throw new HttpException('Not Found', 404)
+  }
 }
