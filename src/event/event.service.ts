@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BalanceService } from 'src/balance/balance.service';
-import { EventDto } from './dto/event.dto';
+import { EventDto, RequestType } from './dto/event.dto';
 import { ResponseEvent } from './dto/response.dto';
-import { RequestType } from './types/type';
 
 @Injectable()
 export class EventService {

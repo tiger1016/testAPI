@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { BalanceType } from "../types/type";
+import { BalanceType } from "../../provider/type";
 
 export class ResponseEvent {
   @ApiProperty({

@@ -55,6 +55,8 @@ export class BalanceService {
 
   transferOne(from: string, to: string, value: number) {
     const indexFrom = this.balances.findIndex(item => item.id === from);
+    if (from === to) throw new HttpException('Origin should be different from Destination', 400)
+
     if (indexFrom > -1) {
       const updatedFrom = this.balances[indexFrom].balance - value
       const indexTo = this.balances.findIndex(item => item.id === to);

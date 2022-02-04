@@ -1,4 +1,4 @@
-import { BalanceType } from "src/event/types/type";
+import { BalanceType } from "src/provider/type";
 
 export const BALANCES: BalanceType[] = [
   {
