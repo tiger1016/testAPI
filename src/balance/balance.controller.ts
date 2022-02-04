@@ -5,7 +5,12 @@ import { BalanceService } from './balance.service';
 export class BalanceController {
   constructor(
     private readonly balanceService: BalanceService
-  ) {}
+  ) { }
+  @Get('all')
+  findAll() {
+    return this.balanceService.findAll();
+  }
+
   @Get(':account_id')
   findId(@Param('account_id') account_id: string) {
     return this.balanceService.findOneById(account_id);
