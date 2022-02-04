@@ -41,21 +41,15 @@ export class BalanceService {
   withdrawOne(id: string, value: number) {
     const index = this.balances.findIndex(item => item.id === id);
     if (index > -1) {
-      const updated = this.balances[index].balance + value
+      const updated = this.balances[index].balance - value
       this.balances = [...this.balances.slice(0, index), {id, balance: updated}, ...this.balances.slice(index + 1)]
       return {
-        destination: {
+        origin: {
           id,
           balance: updated
         }
       }
     }
-    this.balances.push({ id, balance: value })
-    return {
-      destination: {
-        id, 
-        balance: value
-      }
-    }
+    throw new HttpException('Not Found', 404)
   }
 }
